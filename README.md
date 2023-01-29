@@ -15,7 +15,6 @@ A fast-fire repeater
 - __make run__ - up initial application
 - __make rebuild__ - up & build application with **force-recreate** flag
 - __make migrate__ - create initial tables; run after launch application
-- __make run-tests__ - create tests env (services) and run tests
 - __make dev-test__ - run test on dev env
 
 

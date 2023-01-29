@@ -27,7 +27,7 @@ created_in_tests = []
 def test_get_item():
     resp = client.post(
         proto_api_base,
-        data=test_item_1.SerializeToString(),
+        content=test_item_1.SerializeToString(),
     )
     assert resp.status_code == 200
     assert resp.content
@@ -47,7 +47,7 @@ def test_get_items():
     # create item 1
     resp_1 = client.post(
         proto_api_base,
-        data=test_item_1.SerializeToString(),
+        content=test_item_1.SerializeToString(),
     )
     assert resp_1.status_code == 200
     item_1 = scheme_pb2.Item()
@@ -57,7 +57,7 @@ def test_get_items():
     # create item 2
     resp_2 = client.post(
         proto_api_base,
-        data=test_item_2.SerializeToString(),
+        content=test_item_2.SerializeToString(),
     )
     assert resp_2.status_code == 200
     item_2 = scheme_pb2.Item()
@@ -79,7 +79,7 @@ def test_get_items():
 def test_create_invalid():
     resp = client.post(
         proto_api_base,
-        data=test_item_invalid.SerializeToString(),
+        content=test_item_invalid.SerializeToString(),
     )
     assert resp.status_code == 400
 
@@ -87,7 +87,7 @@ def test_create_invalid():
 def test_update_item():
     resp = client.post(
         proto_api_base,
-        data=test_item_1.SerializeToString(),
+        content=test_item_1.SerializeToString(),
     )
     assert resp.status_code == 200
 
@@ -99,7 +99,7 @@ def test_update_item():
 
     resp = client.put(
         proto_api_base + '/' + str(item.item_id) + '/',
-        data=item.SerializeToString(),
+        content=item.SerializeToString(),
     )
     assert resp.status_code == 200
 
