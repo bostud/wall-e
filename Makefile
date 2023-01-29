@@ -11,7 +11,7 @@ rebuild:
 migrate:
 	docker exec walle_app python run_migrations.py
 
-tests:
+run-tests:
 	docker-compose up -d --build test_app test_postgres_db test_redis
 	docker exec walle_test_app python run_migrations.py
 	docker exec walle_test_app pytest tests/
