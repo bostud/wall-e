@@ -1,0 +1,77 @@
+version: "3.8"
+
+services:
+  app:
+    container_name: walle_app
+    build:
+      dockerfile: walle.dockerfile
+      context: .
+    restart: always
+    volumes:
+      - .:/app:rw
+    networks:
+      - walle-net
+    ports:
+      - "8899:8899"
+    depends_on:
+      - redis
+      - postgres_db
+
+  redis:
+    container_name: walle_redis
+    image: redis:alpine
+    networks:
+      - walle-net
+    volumes:
+      - 'redis:/var/redis'
+
+  postgres_db:
+    container_name: walle_postgres
+    image: postgres:13-alpine
+    env_file:
+      - app_dev.env
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/
+    networks:
+      - walle-net
+
+  test_app:
+    container_name: walle_test_app
+    build:
+      dockerfile: walle.dockerfile
+      context: .
+    restart: always
+    volumes:
+      - .:/app:rw
+    networks:
+      - walle-net
+    depends_on:
+      - test_redis
+      - test_postgres_db
+
+  test_redis:
+    container_name: walle_test_redis
+    image: redis:alpine
+    networks:
+      - walle-net
+    volumes:
+      - 'redis:/var/redis'
+
+  test_postgres_db:
+    container_name: walle_test_postgres_db
+    image: postgres:13-alpine
+    env_file:
+      - app_test.env
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/
+    networks:
+      - walle-net
+
+
+networks:
+  walle-net:
+    driver: bridge
+
+volumes:
+  redis:
+  postgres_db:

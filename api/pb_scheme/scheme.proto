@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package protowalle;
+
+
+message CreateItem {
+    string name = 1;
+    string description = 2;
+    int32 items_count = 3;
+}
+
+message UpdateItem {
+    string name = 1;
+    string description = 2;
+    int32 items_count = 3;
+    int32 item_id = 4;
+}
+
+message Item {
+    string name = 1;
+    string description = 2;
+    int32 items_count = 3;
+    int32 item_id = 4;
+    string author_ip = 5;
+}
+
+message Items {
+    repeated Item items = 1;
+}
