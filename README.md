@@ -4,7 +4,6 @@ A fast-fire repeater
 
 # Setup env
 1. Install docker, docker-compose
-2. Install [protobuf](https://developers.google.com/protocol-buffers/docs/downloads)
 
 # Run App
 1. make clear that port **__8899__** is free
