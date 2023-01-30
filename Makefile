@@ -12,4 +12,4 @@ migrate:
 	docker exec walle_app python run_migrations.py
 
 dev-test:
-	docker exec walle_app pytest tests/
+	docker exec walle_app pytest -v tests/
